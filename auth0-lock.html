@@ -1,0 +1,44 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<!-- Auth0Lock script -->
+<script src="../auth0-lock/build/auth0-lock.min.js"></script>
+
+<dom-module id="auth0-lock">
+	<template>
+		<!-- Setting the right viewport -->
+		<!--<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />-->
+		<input id="login" class="btn-login" type="submit" value="coucou" />
+	</template>
+	<script>
+		Polymer({
+			is: "auth0-lock",
+
+			properties: {
+				idToken: {
+					type: String,
+					readOnly: true,
+					notify: true
+				},
+				key: String,
+				url: String
+			},
+
+			listeners: {
+				'login.click': 'handleLogin'
+			},
+
+			handleLogin: function(){
+				var lock = new Auth0Lock(this.key, this.url);
+
+				var userProfile = null;
+
+				lock.show({rememberLastLogin: false}, this.loginResponse.bind(this));
+			},
+
+			loginResponse: function(err, profile, token){
+				this.fire('login', {"profile": profile, "id_token": token});
+				return false;
+			}
+		})
+	</script>
+</dom-module>

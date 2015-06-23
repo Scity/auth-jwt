@@ -1,0 +1,37 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<link rel="import" href="../iron-localstorage/iron-localstorage.html">
+<link rel="import" href="../jwt-decode/jwt-decode.html">
+
+<dom-module id="auth-jwt">
+	<template>
+		<iron-localstorage name="id_token" value="{{token}}"></iron-localstorage>
+		<jwt-decode token="[[token]]" decoded-token="{{decodedToken}}" is-valid="{{isValidToken}}"></jwt-decode>
+
+		<template is="dom-if" restamp="true" if="{{!isValidToken}}">
+			<content select="#out"></content>
+		</template>
+		<template is="dom-if" restamp="true" if="{{isValidToken}}">
+			<content select="#in"></content>
+		</template>
+	</template>
+	<script>
+		Polymer({
+			is: "auth-jwt",
+
+			properties: {
+				token: String,
+				decodedToken: Object,
+				isValidToken: Boolean
+			},
+
+			saveToken: function(token){
+				this.token = token;
+			},
+
+			clearToken: function(){
+				this.token = null;
+			}
+		})
+	</script>
+</dom-module>

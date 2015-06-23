@@ -1,0 +1,24 @@
+{
+  "name": "auth-jwt",
+  "version": "1.0.0",
+  "authors": [
+    "arnaud.delcasse@scity.fr"
+  ],
+  "description": "Polymer web component to handle authentication using JWT tokens - Can handle custom authentication providers using JWT such as Auth0, ...",
+  "keywords": [
+    "authentication", "JWT", "web components", "Polymer", "auth0"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "^1.0.0",
+    "PolymerElements/iron-localstorage": "^1.0.0",
+    "auth0-lock": "*"
+  }
+}
